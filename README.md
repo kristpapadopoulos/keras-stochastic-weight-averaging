@@ -1,6 +1,4 @@
-## Keras Callbacks
-
-### User Defined Keras Callback Functions
+## Stochastic Weight Averaging with Keras callback function
 
 1.  Stochastic Weight Averaging - https://arxiv.org/abs/1803.05407
 
