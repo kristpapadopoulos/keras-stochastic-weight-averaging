@@ -1,12 +1,15 @@
-## Stochastic Weight Averaging with Keras callback function
+### Stochastic Weight Averaging with Keras callback function
 
-1.  Stochastic Weight Averaging - https://arxiv.org/abs/1803.05407
+Stochastic Weight Averaging following paper [Averaging Weights Leads to Wider Optima and Better Generalization
+](https://arxiv.org/abs/1803.05407)
 
-swa.py contains an implementation for stochastic weight averaging (SWA) with a constant learning rate for a user defined amount of epochs.
+The file swa.py contains an implementation for stochastic weight averaging (SWA) with a constant learning rate for a user defined amount of epochs.
 
 Callback is instantiated with filename for saving the final weights of the model after SWA and the number of epochs to average.
 
-e.g. total number of training epochs 150, SWA to start from epoch 140 to average last 10 epochs.
+<b>Example</b>
+
+The total number of training epochs 150, SWA to start from epoch 140 to average last 10 epochs.
 
 number_of_epochs = 150
 
