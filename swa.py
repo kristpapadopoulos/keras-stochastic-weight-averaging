@@ -25,6 +25,11 @@ class SWA(keras.callbacks.Callback):
     
     def on_train_begin(self, logs=None):
         self.nb_epoch = self.params['epochs']
+
+        if self.nb_epoch <= self.swa_epoch:
+            raise ValueError('Training ends before stochastic weight averaging begins, swa_epoch ({}) has to be '
+                             'smaller than training epochs ({})'.format(self.swa_epoch, self.nb_epoch))
+
         print('Stochastic weight averaging selected for last {} epochs.'
               .format(self.nb_epoch - self.swa_epoch))
         
@@ -36,8 +41,7 @@ class SWA(keras.callbacks.Callback):
         elif epoch > self.swa_epoch:    
             for i, layer in enumerate(self.model.layers):
                 self.swa_weights[i] = (self.swa_weights[i] * 
-                    (epoch - self.swa_epoch) + self.model.get_weights()[i])
-                    /((epoch - self.swa_epoch)  + 1)  
+                    (epoch - self.swa_epoch) + self.model.get_weights()[i]) / ((epoch - self.swa_epoch)  + 1)
 
         else:
             pass
