@@ -18,11 +18,24 @@ import keras
 
 class SWA(keras.callbacks.Callback):
     
-    def __init__(self, filepath, swa_epoch):
-        super(SWA, self).__init__()
-        self.filepath = filepath
-        self.swa_epoch = swa_epoch 
+    """
+    A Keras callback function for stochastic weight averaging
+    with a constant learning rate.
+    ...
+
+    Attributes
+    ----------
+    swa_epoch : int
+        the training epoch to start stochatic weight averaging
+    filepath : str
+        filepath to save model weights
+    """
     
+    def __init__(self, swa_epoch, filepath = None):
+        super(SWA, self).__init__()
+        self.swa_epoch = swa_epoch 
+        self.filepath = filepath
+        
     def on_train_begin(self, logs=None):
         self.nb_epoch = self.params['epochs']
 
@@ -49,6 +62,6 @@ class SWA(keras.callbacks.Callback):
     def on_train_end(self, logs=None):
         self.model.set_weights(self.swa_weights)
         print('Final model parameters set to stochastic weight average.')
-        self.model.save_weights(self.filepath)
-        print('Final stochastic averaged weights saved to file.')
-
+        if self.filepath:
+            self.model.save_weights(self.filepath)
+            print('Final stochastic averaged weights saved to file.')
