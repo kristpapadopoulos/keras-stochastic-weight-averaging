@@ -11,8 +11,15 @@ Callback is instantiated with filename for saving the final weights of the model
 
 The total number of training epochs 150, SWA to start from epoch 140 to average last 10 epochs.
 
+```
+from swa import SWA
+
+# specify number of training epochs
 number_of_epochs = 150
 
-swa = SWA(filename, 140)
+# specify the start epoch of stochastic weight averaging
+swa = SWA(140, filepath = None)
 
+# call SWA during model fitting
 model.fit(..., callbacks = [swa])
+```
